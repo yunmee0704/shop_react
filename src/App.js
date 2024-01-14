@@ -8,7 +8,7 @@ import {Routes, Route, Link, useNavigate, Outlet} from 'react-router-dom'
 import Detail from './routes/detail.js'
 
 function App() {
-  let [shoes] =useState(data)
+  let [shoes,setShose] =useState(data)
   let navigate = useNavigate();
 
   return (
@@ -28,12 +28,22 @@ function App() {
         <Route path ="/" element={
         <div>      
           <div className='main-bg'></div>
+          <button onClick={()=>{
+            let copy = [...shoes];
+            let atoz=copy.sort(function(a,b){
+              if(a.title > b.title)return 1
+              if(a.title < b.title)return -1
+            });
+            setShose(atoz)
+           }
+       
+          }>정렬</button>
             <Container>
             <Row>
             {
               shoes.map(function(a,i){
                 return(
-                  <Card shoes={shoes[i]}/>
+                  <Card shoes={shoes[i] } key={i}/>
                 )
               })
             }
