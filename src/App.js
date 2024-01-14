@@ -2,12 +2,15 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';//부트스트랩 css
 import { Container, Nav, Navbar, Row, Col} from 'react-bootstrap'
-
+import {useState} from 'react'
+import {data} from './data'
+import {Routes, Route, Link} from 'react-router-dom'
 
 function App() {
+  let [shoes] =useState(data)
   return (
     <div className="App">
-     
+
       <Navbar bg="dark" data-bs-theme="dark">
         <Container>
           <Navbar.Brand href="#home">신발가게</Navbar.Brand>
@@ -17,6 +20,12 @@ function App() {
           </Nav>
         </Container>
       </Navbar>
+
+      <Routes>
+        <Route path ="/" element={<div>메인</div>}/>
+        <Route path ="/detail" element={<div>나는 상세페이지</div>}/>
+      </Routes>
+
       <div className='main-bg'></div>
 
       <Container>
