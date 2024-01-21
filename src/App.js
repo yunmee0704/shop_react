@@ -6,11 +6,14 @@ import {useState} from 'react'
 import data from './data'
 import {Routes, Route, Link, useNavigate, Outlet} from 'react-router-dom'
 import Detail from './routes/detail.js'
+import axios from 'axios'
+
 
 
 function App() {
   let [shoes,setShose] =useState(data)
   let navigate = useNavigate();
+  let [click, setClick] =useState(1);
 
   return (
     <div className="App">
@@ -50,7 +53,37 @@ function App() {
             }
             </Row>
             </Container>
-          </div>}/>
+            <button onClick ={()=>{
+              setClick(click+1)
+     
+              if(click === 1){
+                axios.get('https://codingapple1.github.io/shop/data2.json')
+                .then((결과)=>{    
+                  let copy =[...shoes, ...결과.data];
+                  setShose(copy);
+                })
+                .catch(()=>{
+                  console.log('실패')
+                })
+              }else if(click === 2 ){
+                axios.get('https://codingapple1.github.io/shop/data3.json')
+                .then((결과)=>{    
+                  let copy =[...shoes, ...결과.data];
+                  setShose(copy);
+                })
+                .catch(()=>{
+                  console.log('실패')
+                })
+              }else{
+                alert('상품이 더 없습니다.')
+              }
+              
+             
+              
+              
+            }}>더보기</button>
+          </div>
+        }/>
         <Route path ="/detail/:id" element={<Detail shoes={shoes}/>
         }/>
         <Route path ="*" element={<div>없는 페이지에요</div>}/>
@@ -73,7 +106,7 @@ function App() {
 function Card(props){
   return(
     <Col>
-      <img src={process.env.PUBLIC_URL +  `/img/shoes${props.shoes.id+1}.jpg`} width="80%" />
+      <img src={`https://codingapple1.github.io/shop/shoes${props.shoes.id+1}.jpg`} width="80%" />
       <h4>{props.shoes.title}</h4>
       <p>{props.shoes.content}</p>
       <p>{props.shoes.price}</p>
