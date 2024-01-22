@@ -19,3 +19,12 @@
 .container{}
 .row{justify-content: space-between !important;}
 .row .col{width: 30% !important; flex:none;}
+
+.start {
+  opacity : 0;
+}
+
+.end {
+  opacity: 1;
+  transition : opacity 0.5s;
+}
