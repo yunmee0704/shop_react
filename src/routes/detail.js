@@ -2,6 +2,8 @@ import { useParams } from "react-router-dom"; //import해주고
 import {Nav} from 'react-bootstrap'
 import { useState ,useEffect } from 'react'
 import styled from 'styled-components'
+import {addItem} from '../store'
+import { useDispatch } from "react-redux";
 
 var YellowBox =styled.div`
 background :yellow;
@@ -18,6 +20,7 @@ function Detail(props){
     let [inputValue, setValue] =useState('');
     let [탭, 탭변경] =useState(0);
     let [ani, setAni]=useState('');
+    let dispatch = useDispatch()
     
     useEffect(()=>{
       let a = setTimeout(()=>{setAni('end');},100) //end를 붙는 시점을 살짝 0.01초 뒤로 미뤄줌
@@ -50,7 +53,7 @@ function Detail(props){
             <h4 className="pt-5">{찾은상품[id].title}</h4>
             <p>{찾은상품[id].content}</p>
             <p>{찾은상품[id].price}</p>
-            <button className="btn btn-danger">주문하기</button> 
+            <button className="btn btn-danger" onClick={()=>{dispatch(addItem({id :1, name : 'Grey Yordan', count : 1}))}}>주문하기</button> 
           </div>
           </div>
           <Nav variant="tabs"  defaultActiveKey="link0">

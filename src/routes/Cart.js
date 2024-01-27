@@ -1,6 +1,6 @@
 import { Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux';
-import { changeName , changeAge,plusCount} from '../store';
+import { changeAge, plusCount} from '../store';
 
 function Cart(){
     
@@ -34,7 +34,7 @@ function Cart(){
                         <td>{b.id}</td>
                         <td>{b.name}</td>
                         <td>{b.count}</td>
-                        <td><button onClick={()=>{dispatch(plusCount())}}>+</button></td>
+                        <td><button onClick={()=>{dispatch(plusCount(b.id))}}>+</button></td>
                         </tr>
                      )
                     })
