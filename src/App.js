@@ -8,12 +8,22 @@ import {Routes, Route, Link, useNavigate, Outlet} from 'react-router-dom'
 import Detail from './routes/detail.js'
 import axios from 'axios'
 import 장바구니 from './routes/Cart.js'
+import { useQuery } from 'react-query';
 
 
 function App() {
   let [shoes,setShose] =useState(data)
   let navigate = useNavigate();
   let [click, setClick] =useState(1);
+
+  let result = useQuery('작명',()=>{
+   return axios.get('https://codingapple1.github.io/userdata.json').then((a)=>{
+      return a.data
+    }),{staleTime : 2000}
+  })
+
+  
+
 
   return (
     <div className="App">
@@ -24,6 +34,12 @@ function App() {
           <Nav className="me-auto">
             <Nav.Link onClick={()=>{navigate('/')}}>Home</Nav.Link>
             <Nav.Link onClick={()=>{navigate('/cart')}}>cart</Nav.Link>
+          </Nav>
+          <Nav className ="ms-auto">
+            반갑습니다 
+            {result.isLoading && '로딩중'}
+            {result.error && '에러남'}
+            {result.data && result.data.name}
           </Nav>
         </Container>
       </Navbar>

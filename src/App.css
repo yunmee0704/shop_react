@@ -10,12 +10,16 @@
   background-position: center;
 }
 
+
 .navbar-nav a{
   text-decoration: none;
   color:#fff;
   margin-right: 10px;
 }
 
+.ms-auto{
+  color:#fff;
+}
 .container{}
 .row{justify-content: space-between !important;}
 .row .col{width: 30% !important; flex:none;}
